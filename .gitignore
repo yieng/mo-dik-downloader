@@ -3,6 +3,15 @@
 *.html
 *_vlc.sh
 
+*.mp4
+*.3gp
+*.3gpp
+*.mp3
+*.pdf
+*.jpg
+*.jpeg
+*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
