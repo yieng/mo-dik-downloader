@@ -25,7 +25,7 @@ for i in range(len(VM)):
    #print(meta.title)
 
    #title = i[-9:-1]
-   title = Titles[i][0:-1]
+   title = Titles[i].replace('\n','')
 
    #v = Vimeo.from_video_id(video_id=i.split('/')[3])
    '''
@@ -65,14 +65,14 @@ for i in range(len(VM)):
       #px(vid)
       
       # this gives the lowest resolution
-      vid_choice = vid[0][1]
+      #vid_choice = vid[0][1]
       
       # this gives the highest resolution
       #vid_choice = s[-1][1]
 
       # this gives 360p
-      #req_res = '360p'
-      #vid_choice = [x[1] for x in vid if x[0]==req_res][0]
+      req_res = '360p'
+      vid_choice = [x[1] for x in vid if x[0]==req_res][0]
       # choices: 240p, 360p, 540p, 720p, 1080p, 1440p, 2160p
 
       video_file = url_base[0] + '/parcel/video/' + vid_choice + '.mp4'
