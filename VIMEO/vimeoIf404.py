@@ -68,7 +68,7 @@ for i in range(len(VM)):
       #vid_choice = vid[0][1]
       
       # this gives the highest resolution
-      #vid_choice = s[-1][1]
+      #vid_choice = vid[-1][1]
 
       # this gives 360p
       req_res = '360p'
