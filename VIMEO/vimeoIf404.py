@@ -62,12 +62,18 @@ for i in range(len(VM)):
       
       # get the 'id' for video download (not 'profile')
       vid = [(s['quality'], s['id'].split('-')[0]) for s in streams]
+      #px(vid)
       
       # this gives the lowest resolution
       vid_choice = vid[0][1]
       
       # this gives the highest resolution
       #vid_choice = s[-1][1]
+
+      # this gives 360p
+      #req_res = '360p'
+      #vid_choice = [x[1] for x in vid if x[0]==req_res][0]
+      # choices: 240p, 360p, 540p, 720p, 1080p, 1440p, 2160p
 
       video_file = url_base[0] + '/parcel/video/' + vid_choice + '.mp4'
 
