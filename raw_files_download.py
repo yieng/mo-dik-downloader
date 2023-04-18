@@ -30,8 +30,11 @@ for url in urls:
     r = requests.get(url, stream=True)
     path = paths[urls.index(url)]
     with open(path, 'wb') as f:
-        total_length = int(r.headers.get('content-length'))
-        for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length//1024) + 1): 
+        try:
+            total_length = int(r.headers.get('content-length'))
+        except TypeError:
+            total_length = 0
+        for chunk in progress.bar(r.iter_content(chunk_size=1024), expected_size=(total_length//1024) + 1):
             if chunk:
                 f.write(chunk)
                 f.flush()
