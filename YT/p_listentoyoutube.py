@@ -15,7 +15,7 @@ for t in YT:
    except pytube.exceptions.RegexMatchError or http.client.IncompleteRead: 
       print(t+"  ... TRY AGAIN"+t)
    else:
-      yt = YouTube(t)
+      yt = YouTube(t, use_oauth=True, allow_oauth_cache=True)
       yt_title = yt.title
       print(yt_title)
       print('DOWNLOADING (audio only): ' + yt_title)

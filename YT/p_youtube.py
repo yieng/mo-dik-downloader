@@ -18,16 +18,18 @@ for t in YT:
    except pytube.exceptions.RegexMatchError or http.client.IncompleteRead: 
       print(t+"  ... TRY AGAIN"+t)
    else:
-      yt = YouTube(t)
+      yt = YouTube(t, use_oauth=True, allow_oauth_cache=True)
       yt_title = yt.title
       print(yt_title)
       print('DOWNLOADING: '+ yt_title)
+
 
       #SUPER LOW RES - for plain music videos
       #yt.streams.first().download()
 
       # Standard loading
       new_file_name = re.sub(r'[^\w]', '_', yt_title) + '_' + t.split('v=')[1].replace('\n','')+'.mp4'
+      #new_file_name = t.split('v=')[1].replace('\n','')+'.mp4'
       yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').asc().first().download(filename=new_file_name)
       #yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download(filename=new_file_name)
 
@@ -45,13 +47,14 @@ for t in YT:
          g.write('\n')
          g.write(yt.description)
          g.write('\n')'''
-         
+      
       print('DONE: '+ yt_title)
       print('====================================')
 
       # DELETE the completed item from the original youtube urls txt file
-      del YT[YT.index(t)]
       with open('youtube_urls.txt','r+') as f:
          for y in YT:
-            f.write(y)
+            if y!=t:
+               f.write(y)
+      del YT[YT.index(t)]
       #  A = input("press enter to continue...") 
