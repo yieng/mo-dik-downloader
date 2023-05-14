@@ -1,0 +1,1 @@
+curl -X POST https://textbelt.com/text         --data-urlencode phone='+12016376074'         --data-urlencode message='Hi James, I even know you had 65 staff before you said that number on 2/20 video. Hope my hearts are always softly in your heart.'         -d key=textbelt
