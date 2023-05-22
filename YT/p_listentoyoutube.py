@@ -15,13 +15,15 @@ for t in YT:
    except pytube.exceptions.RegexMatchError or http.client.IncompleteRead: 
       print(t+"  ... TRY AGAIN"+t)
    else:
-      yt = YouTube(t, use_oauth=True, allow_oauth_cache=True)
+      yt = YouTube(t)#, use_oauth=True, allow_oauth_cache=True)
       yt_title = yt.title
       print(yt_title)
       print('DOWNLOADING (audio only): ' + yt_title)
 
       new_file_name = "./" + re.sub(r'[^\w]', '_', yt_title) + '_' + t.split('=')[1].replace('\n','')+'.mp4'
-      new_file_name = new_file_name.replace('&list','')
+      new_file_name = new_file_name.split('&list')[0]
+      new_file_name = new_file_name.split('&t')[0]
+      new_file_name = new_file_name+'.mp4'
       
       ty = yt.streams.filter(only_audio=True, file_extension='mp4')
       #ty[0].download("./") # no YT id
@@ -37,4 +39,5 @@ for t in YT:
       with open('youtube_urls.txt','w+') as f:
          for y in YT:
             f.write(y)
+         f.write('\n')
       #  A = input("press enter to continue...") 

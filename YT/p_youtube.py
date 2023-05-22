@@ -14,11 +14,11 @@ with open('youtube_urls.txt','r+') as f:
 
 for t in YT:
    try:
-      YouTube(t)
+      YouTube(t) #, use_oauth=False, allow_oauth_cache=True)
    except pytube.exceptions.RegexMatchError or http.client.IncompleteRead: 
       print(t+"  ... TRY AGAIN"+t)
    else:
-      yt = YouTube(t, use_oauth=True, allow_oauth_cache=True)
+      yt = YouTube(t) #, use_oauth=False, allow_oauth_cache=True)
       yt_title = yt.title
       print(yt_title)
       print('DOWNLOADING: '+ yt_title)
@@ -28,7 +28,7 @@ for t in YT:
       #yt.streams.first().download()
 
       # Standard loading
-      new_file_name = re.sub(r'[^\w]', '_', yt_title) + '_' + t.split('v=')[1].replace('\n','')+'.mp4'
+      new_file_name = re.sub(r'[^\w]', '_', yt_title) + '_' + t.split('v=')[1].split('&list')[0].replace('\n','')+'.mp4'
       #new_file_name = t.split('v=')[1].replace('\n','')+'.mp4'
       yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').asc().first().download(filename=new_file_name)
       #yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download(filename=new_file_name)
@@ -53,8 +53,11 @@ for t in YT:
 
       # DELETE the completed item from the original youtube urls txt file
       with open('youtube_urls.txt','r+') as f:
+         del YT[YT.index(t)]
          for y in YT:
             if y!=t:
                f.write(y)
-      del YT[YT.index(t)]
+            else:
+               f.write('')
+      
       #  A = input("press enter to continue...") 
