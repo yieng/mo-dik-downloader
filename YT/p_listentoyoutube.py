@@ -8,8 +8,11 @@ with open('youtube_urls.txt','r+') as f:
 
 #YT = sorted(list(set(YT)))
 # print(YT)
+lenYT = len(YT)
 
-for t in YT:
+while lenYT > 0:
+   j = 0
+   t = YT[j]
    try:
       YouTube(t)
    except pytube.exceptions.RegexMatchError or http.client.IncompleteRead: 
@@ -23,7 +26,8 @@ for t in YT:
       new_file_name = "./" + re.sub(r'[^\w]', '_', yt_title) + '_' + t.split('=')[1].replace('\n','')+'.mp4'
       new_file_name = new_file_name.split('&list')[0]
       new_file_name = new_file_name.split('&t')[0]
-      new_file_name = new_file_name+'.mp4'
+      if '.mp4' not in new_file_name:
+         new_file_name = new_file_name+'.mp4'
       
       ty = yt.streams.filter(only_audio=True, file_extension='mp4')
       #ty[0].download("./") # no YT id
@@ -35,9 +39,12 @@ for t in YT:
       #  A = input("press enter to continue...") 
 
       # DELETE the completed item from the original youtube urls txt file
-      del YT[YT.index(t)]
-      with open('youtube_urls.txt','w+') as f:
+      with open('youtube_urls.txt','w') as f:
          for y in YT:
-            f.write(y)
-         f.write('\n')
+            if y!=t:
+               f.write(y)
+            else:
+               f.write('')
+         del YT[YT.index(t)]
+      lenYT -= 1
       #  A = input("press enter to continue...") 
