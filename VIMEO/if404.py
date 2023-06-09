@@ -53,7 +53,10 @@ for i in range(len(VM)):
       url_base = url.split('/sep/')
 
       # audio: the second option given
-      audio_file = url_base[0] + '/parcel/audio/' + url_base[1].split('/audio/')[1].split(',')[1] + '.mp4'
+      try:
+         audio_file = url_base[0] + '/parcel/audio/' + url_base[1].split('/audio/')[1].split(',')[1] + '.mp4'
+      except IndexError:
+         audio_file = url_base[0] + '/parcel/audio/' + url_base[1].split('video/')[1].split(',')[1] + '.mp4'
       
       # video: need to choose resolution
       # sort stream from lowest to highest resolution
@@ -62,7 +65,7 @@ for i in range(len(VM)):
       
       # get the 'id' for video download (not 'profile')
       vid = [(s['quality'], s['id'].split('-')[0]) for s in streams]
-      #px(vid)
+      px(vid)
       
       # this gives the lowest resolution
       #vid_choice = vid[0][1]
@@ -71,7 +74,11 @@ for i in range(len(VM)):
       #vid_choice = vid[-1][1]
 
       # this gives 360p
+      #a = input("req_res (???p):")
+      #req_res = a
       req_res = '360p'
+      #vid_choice = [x[1] for x in vid if x[0]==req_res][0]
+      #print([x[1] for x in vid if x[0]==req_res])
       vid_choice = [x[1] for x in vid if x[0]==req_res][0]
       # choices: 240p, 360p, 540p, 720p, 1080p, 1440p, 2160p
 
