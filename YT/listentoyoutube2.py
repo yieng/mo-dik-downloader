@@ -29,6 +29,7 @@ def getVideoID(t):
    for a in abbr:
      if a in t:
          video = t.split(a)[-1]
+         video = video.split('?')[0]
    print(video)
    #yt_web = "https://www.youtube.com/watch?v="
    #videoid = yt_web + video
