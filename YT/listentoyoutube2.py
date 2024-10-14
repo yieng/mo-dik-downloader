@@ -58,7 +58,7 @@ while (lenYT > 0) and count<maxcount:
       print(ys)
       #print(stream)
       #yd = stream(ys,).download(output_path=new_file_name)
-      ys.download(mp3=True,output_path=new_path, filename=re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t) +'.mp3')
+      ys.download(mp3=True,output_path=new_path, filename=re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t))
 
       print('DONE: '+ yt_title)
 
