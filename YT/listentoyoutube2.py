@@ -50,8 +50,8 @@ while (lenYT > 0) and count<maxcount:
       print(yt_title)
       print('DOWNLOADING: '+ yt_title)
 
-      new_file_name = new_path + re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t) +'.mp4'
-      old_file_name = old_path + re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t) +'.mp4'
+      #new_file_name = new_path + re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t) +'.mp4'
+      #old_file_name = old_path + re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t) +'.mp4'
 
       ys = yt.streams.get_highest_resolution()
       #ys = yt.streams.filter(progressive=True, file_extension='mp4').download(output_path=new_file_name)
@@ -61,7 +61,7 @@ while (lenYT > 0) and count<maxcount:
       ys.download(mp3=True,output_path=new_path, filename=re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t))
 
       print('DONE: '+ yt_title)
-
+      print('====================================')
       # DELETE the completed item from the original youtube urls txt file
       with open('youtube_urls.txt','w') as f:
          for y in YT:
@@ -74,6 +74,7 @@ while (lenYT > 0) and count<maxcount:
       
    except E.RegexMatchError:
       print(t+"  ... TRY AGAIN: "+t)
+      print('====================================')
       j+=1
       continue
 
