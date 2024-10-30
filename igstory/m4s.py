@@ -35,19 +35,21 @@ titles = T
 ##for url in urls:
 ##    if 'mp4' in url:
         
-
+# Architecture - Week 5 - 28NOV22_video
 urls = [x.replace('\n','') for x in urls]
 titles = [x.replace('\n','') for x in titles]
 paths = ['/Users/lglab/Downloads/' + title.split('/')[-1] for title in titles]
 
-urls = ["https://vod-adaptive-ak.vimeocdn.com/exp=1730034776~acl=%2F1b332dc2-e6a0-4909-9f2d-f794aac5b5ac%2F%2A~hmac=4496a7a6aa460ecb3cbb6cc830631e24c81c679bf574d038722a8af707ca6a71/1b332dc2-e6a0-4909-9f2d-f794aac5b5ac/v2/remux/avf/459815eb-35f0-4dc4-a7dc-f388cbee0bf9/segment.m4s?pathsig=8c953e4f~OF3eRdt7Ww23IAs4hDb-5GsuMT-6gRpQA5uB9Rb6Gbs&r=dXMtd2VzdDE%3D&sid="+str(i)+"&st=video" for i in range(1,655)]
-path = "/Users/lglab/Downloads/Architecture - Week 5 - 28NOV22_video.mp4"
+urls = ["https://vod-adaptive-ak.vimeocdn.com/exp=1730034776~acl=%2F1b332dc2-e6a0-4909-9f2d-f794aac5b5ac%2F%2A~hmac=4496a7a6aa460ecb3cbb6cc830631e24c81c679bf574d038722a8af707ca6a71/1b332dc2-e6a0-4909-9f2d-f794aac5b5ac/v2/remux/avf/459815eb-35f0-4dc4-a7dc-f388cbee0bf9/segment.m4s?pathsig=8c953e4f~OF3eRdt7Ww23IAs4hDb-5GsuMT-6gRpQA5uB9Rb6Gbs&r=dXMtd2VzdDE%3D&sid=" \
+        +str(i)+"&st=video" for i in range(1,655)]
+paths = ["/Users/lglab/Downloads/video-"\
+         +str(i)+".mp4" for i in range(1,655)]
 
 # download with progress bar % visible
 for url in urls:
     r = requests.get(url, stream=True)
-    path = path #s[urls.index(url)]
-    with open(path, 'ab') as f:
+    path = paths[urls.index(url)]
+    with open(path, 'wb') as f:
         try:
             total_length = int(r.headers.get('content-length'))
         except TypeError:
@@ -56,6 +58,20 @@ for url in urls:
             if chunk:
                 f.write(chunk)
                 f.flush()
+
+'''all="Architecture - Week 5 - 28NOV22"
+cat video-0.m4s >> all.m4s
+cat video-1.m4s >> all.m4s
+cat video-2.m4s >> all.m4s
+cat video-3.m4s >> all.m4s
+cat video-4.m4s >> all.m4s
+cat video-5.m4s >> all.m4s
+cat video-6.m4s >> all.m4s
+cat video-7.m4s >> all.m4s
+cat video-8.m4s >> all.m4s
+cat video-9.m4s >> all.m4s
+cat video-10.m4s >> all.m4s
+'''
 
 """
 for url in urls:
