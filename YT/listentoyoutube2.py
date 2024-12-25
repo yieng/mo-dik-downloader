@@ -4,6 +4,8 @@ from pytubefix import Stream as stream
 from pytubefix import exceptions as E
 
 import re
+import os
+import subprocess
  
 # make sure NO non-YouTube links are in the file.
 with open('youtube_urls.txt','r+') as f:
@@ -58,8 +60,14 @@ while (lenYT > 0) and count<maxcount:
       print(ys)
       #print(stream)
       #yd = stream(ys,).download(output_path=new_file_name)
-      ys.download(mp3=True,output_path=new_path, filename=re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t))
+      new_file_name = re.sub(r'[^\w]', '_', yt_title) + '_' + getVideoID(t)
+      new_file_name1 = new_file_name + '.mp4'
+      ys.download(mp3=True,output_path=new_path, filename=new_file_name1)
 
+      # convert mp4 to mp3
+      subprocess.run(['ffmpeg','-i',os.path.join(new_path, new_file_name1) + '.mp3','-q:a','0','-map','a',os.path.join(new_path, new_file_name + '.mp3')])
+      os.remove(os.path.join(new_path, new_file_name1) + ".mp3")
+                  
       print('DONE: '+ yt_title)
       print('====================================')
       # DELETE the completed item from the original youtube urls txt file
@@ -77,10 +85,18 @@ while (lenYT > 0) and count<maxcount:
       print('====================================')
       j+=1
       continue
-
+   except E.VideoUnavailable:
+      print('====================================')
+      j+=1
+      continue
 
 print('====================================')
 
+# convert all mp4 into mp3
+mp3_dir = 'mp3_folder'
+mp3_path = os.path.join(new_path,mp3_dir)
+os.mkdir(mp4_path)
+exec('for i in *.mp4; do ffmpeg -i "$i" -q:a 0 -map a "$(basename "${i/.mp4}").mp3"; done;')
 
 
 """from pytubefix import YouTube
