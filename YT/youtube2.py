@@ -45,7 +45,7 @@ while (lenYT > 0) and count<maxcount:
    t = YT[j]
 
    try:
-      yt = YouTube(t, on_progress_callback = on_progress)
+      yt = YouTube(t, 'WEB_EMBED', on_progress_callback = on_progress)
       yt_title = yt.title
       print(yt_title)
       print('DOWNLOADING: '+ yt_title)
@@ -76,7 +76,14 @@ while (lenYT > 0) and count<maxcount:
       print(t+"  ... TRY AGAIN: "+t)
       print('====================================')
       j+=1
+      lenYT -= 1
       continue
+   #except E.VideoUnavailable:
+   #   print(t+": video unavailable")
+   #   print('====================================')
+   #   j+=1
+   #   lenYT -= 1
+   #   continue
 
 
 print('====================================')
