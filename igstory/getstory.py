@@ -17,6 +17,9 @@ with open('urls.txt','r',encoding='utf-8') as f:
 if ('\n' in urls):
     urls.remove('\n')
 
+urls2 = [url.split(' ')[-1] for url in urls]
+urls = urls2
+
 try:
     with open('title.txt','r',encoding='utf-8') as f:
         titles = f.readlines()
@@ -29,6 +32,8 @@ except FileNotFoundError:
 if len(optional_arg) == 1:
     T = [t.replace('T','_').replace('.000Z','_UTC').replace(':','-') for t in titles]
 titles = T
+for i in range(0,10):
+    print(titles[i])
 
 # finally process the urls and titles
 
