@@ -16,7 +16,7 @@ count=0
 maxcount=10
 j = 0
 
-new_path = '/Users/lglab/Public/clear_all_videos/'#'/Volumes/Revision/JOK_stuff_since_20260215/'
+new_path = '/Users/lglab/Public/clear_all_videos/
 old_path = '/Users/lglab/Downloads/YT/'
 
 def getVideoID(t):
